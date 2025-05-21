@@ -1,0 +1,359 @@
+
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesquisa de Clima - GAO Lavanderia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #007BFF, #0056b3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      animation: fadeInBody 1s ease;
+      flex-direction: column;
+    }
+    .container, .confirmation {
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.8s ease;
+      text-align: center;
+    }
+    h1 {
+      color: #005baa;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #333;
+      margin-top: 2rem;
+    }
+    p.intro {
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      color: #444;
+    }
+    p.confirm-text {
+      font-size: 1.1rem;
+      color: #333;
+      margin-top: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      color: #333;
+      font-weight: bold;
+      text-align: left;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.4rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #005baa;
+      box-shadow: 0 0 0 3px rgba(0,91,170,0.2);
+      outline: none;
+    }
+    select:invalid {
+      color: #999;
+    }
+    option[value=""] {
+      display: none;
+    }
+    button {
+      background-color: #005baa;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 2rem;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #003f7d;
+      transform: scale(1.02);
+    }
+    .hidden {
+      display: none;
+    }
+    .estrelas {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .estrelas span {
+      font-size: 2.2rem;
+      color: #ccc;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease;
+      margin: 0 4px;
+    }
+    .estrelas span.hover,
+    .estrelas span.selecionada {
+      color: gold;
+    }
+    .estrelas span.animar {
+      transform: scale(1.4);
+    }
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="formularioContainer">
+    <h1><i class="fas fa-users"></i> Pesquisa de Clima Organizacional</h1>
+    <p class="intro">Esta pesquisa tem como objetivo mapear a percepção dos colaboradores sobre o ambiente de trabalho, a cultura organizacional, a atuação da liderança e os fatores que impactam diretamente a motivação e produtividade da equipe.<br><br>🔒 Esta é uma pesquisa <strong>100% anônima</strong>. Nenhuma resposta será associada ao seu nome ou cargo.</p>
+    <form id="formClima">
+     <label for="setor">Setor</label>
+      <select id="setor" name="setor" required>
+        <option value="">Selecione</option>
+        <option value="Limpeza">Limpeza</option>
+        <option value="Manutenção">Manutenção</option>
+        <option value="Qualidade">Qualidade</option>
+        <option value="Produção(área crítica)">Produção (área crítica)</option>
+        <option value="Produção(área limpa)">Produção (área limpa)</option>
+        <option value="Logística">Logística</option>
+        <option value="Administrativo">Administrativo</option>
+      </select>
+
+      <label for="cargo">Cargo do Trabalhador</label>
+      <input type="text" id="cargo" name="cargo" required>
+
+      <label for="tempo">Tempo de Empresa</label>
+      <select id="tempo" name="tempo" required>
+        <option value="">Selecione</option>
+        <option value="1 a 4 meses">1 a 4 meses</option>
+        <option value="5 a 11 meses">5 a 11 meses</option>
+        <option value="1 a 3 anos">1 a 3 anos</option>
+        <option value="4 a 6 anos">4 a 6 anos</option>
+        <option value="7 a 10 anos">7 a 10 anos</option>
+        <option value="Acima de 10 anos">Acima de 10 anos</option>
+      </select>
+
+      <label for="participa">Você deseja participar da pesquisa de clima organizacional?</label>
+      <select id="participa" name="participa" required>
+        <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+	  
+      <div id="parte2" class="hidden">
+        <h2>🏛 Cultura e Valores Organizacionais</h2>
+      <label>1. A Gao Lavanderia valoriza os colaboradores com treinamentos?</label>
+      <select id="pergunta1" name="pergunta1" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>2. Já percebeu ambiente negativo entre colaboradores e líderes?</label>
+      <select id="pergunta2" name="pergunta2" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <h2>📢 Comunicação Interna</h2>
+      <label>3. Comunicação entre adm. e colaboradores é boa?</label>
+      <select name="pergunta3" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>4. Seu líder é claro ao delegar funções?</label>
+      <select name="pergunta4" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>5. Comunicação com seu líder é transparente?</label>
+      <select name="pergunta5" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <h2>⏱ Carga de Trabalho e Bem-Estar</h2>
+      <label>6. O ambiente é agradável?</label>
+      <select name="pergunta6" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>7. Você confia nos seus colegas?</label>
+      <select name="pergunta7" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>8. Se sente confortável com sua equipe?</label>
+      <select name="pergunta8"	required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>9. Sentiu que teve tarefas demais nas últimas semanas?</label>
+      <select name="pergunta9" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Às vezes">Às vezes</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <h2>🧭 Liderança e Suporte</h2>
+      <label>10. Seu trabalho impacta sua vida pessoal?</label>
+      <select name="pergunta10" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>11. Pode contar com seu líder quando precisa?</label>
+      <select name="pergunta11" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+
+      <label>12. Local oferece boas condições de trabalho?</label>
+      <select name="pergunta12" required>
+	    <option value="">Selecione</option>
+        <option value="Sim">Sim</option>
+        <option value="Parcialmente">Parcialmente</option>
+        <option value="Não">Não</option>
+      </select>
+        <h2>📝 Sugestões e Comentários</h2>
+        <label for="pergunta14">13. Elogios, críticas ou sugestões ao gerente:</label>
+        <textarea name="pergunta14"></textarea>
+
+        <label for="pergunta15">14. Ideias ou sugestões para a Diretoria:</label>
+        <textarea name="pergunta15"></textarea>
+
+        <label for="pergunta16">15. Comentário geral ou sugestão de melhoria:</label>
+        <textarea name="pergunta16"></textarea> 
+		
+		<h2>📊 Avaliação da Empresa</h2>
+		<label>16. De 1 a 10, qual a probabilidade de você indicar a empresa para um amigo?</label>
+        <div id="estrelas" class="estrelas"></div>
+        <input type="hidden" name="pergunta16" id="respostaEstrela" required>
+		
+		<label>17. De 1 a 10, como você avalia a empresa 'GAO LAVANDERIA'?</label>
+        <div id="estrelas2" class="estrelas"></div>
+        <input type="hidden" name="pergunta17" id="respostaEstrela2" required>
+		
+		<label>18. De 1 a 10, qual nota você daria ao seu departamento</label>
+        <div id="estrelas3" class="estrelas"></div>
+        <input type="hidden" name="pergunta18" id="respostaEstrela3" required>
+    </form>
+  </div>
+
+  <div class="confirmation hidden" id="mensagemConfirmacao">
+    <h2>🎉 Obrigado pela sua participação!</h2>
+    <p class="confirm-text">Sua resposta foi registrada com sucesso.<br><strong>Esta pesquisa é 100% anônima</strong> e será usada apenas para melhorias internas.</p>
+  </div>
+
+  <script>
+  const form = document.getElementById('formClima');
+  const participa = document.getElementById('participa');
+  const parte2 = document.getElementById('parte2');
+  const confirmacao = document.getElementById('mensagemConfirmacao');
+  const formularioContainer = document.getElementById('formularioContainer');
+
+  const respostaEstrela = document.getElementById('respostaEstrela');
+  const respostaEstrela2 = document.getElementById('respostaEstrela2');
+
+  function criarEstrelas(containerId, inputHidden) {
+    const container = document.getElementById(containerId);
+    for (let i = 1; i <= 10; i++) {
+      const estrela = document.createElement('span');
+      estrela.innerHTML = '★';
+      estrela.dataset.valor = i;
+
+      estrela.addEventListener('mouseover', () => {
+        const estrelas = container.querySelectorAll('span');
+        estrelas.forEach((e, idx) => {
+          e.classList.toggle('hover', idx < i);
+        });
+      });
+
+      estrela.addEventListener('mouseout', () => {
+        const estrelas = container.querySelectorAll('span');
+        estrelas.forEach(e => e.classList.remove('hover'));
+      });
+
+      estrela.addEventListener('click', () => {
+        const estrelas = container.querySelectorAll('span');
+        estrelas.forEach((e, idx) => {
+          e.classList.toggle('selecionada', idx < i);
+        });
+        document.getElementById(inputHidden).value = i;
+      });
+
+      container.appendChild(estrela);
+    }
+  }
+
+  participa.addEventListener('change', function () {
+    if (this.value === 'Sim') {
+      parte2.classList.remove('hidden');
+    } else {
+      parte2.classList.add('hidden');
+    }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    formularioContainer.classList.add('hidden');
+    confirmacao.classList.remove('hidden');
+  });
+
+  criarEstrelas('estrelas', 'respostaEstrela');
+  criarEstrelas('estrelas2', 'respostaEstrela2');
+   criarEstrelas('estrelas3', 'respostaEstrela3');
+</script>
+   <button type="submit">Enviar Resposta</button>
+</body>
+</html>
+
